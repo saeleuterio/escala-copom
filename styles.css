@@ -1,125 +1,99 @@
 :root {
     --bg: #f5f6f8;
-    /* fundo principal suave */
     --card: #ffffff;
-    /* cartões/branco suave */
     --text: #2f3542;
-    /* texto principal */
     --muted: #6c757d;
-    /* texto secundário */
     --accent: #a3c4f3;
-    /* azul pastel */
     --accent-2: #b9e3c6;
-    /* verde pastel */
     --border: #d1d5db;
-    /* borda clara */
     --row: #f9fafb;
-    /* linha clara */
     --row-alt: #f1f5f9;
-    /* linha alternada */
     --row-hover: #e6edf3;
-    /* hover suave */
-    --success: #a0d995;
-    /* verde suave */
-    --warning: #fcd5b5;
-    /* laranja pastel */
-    --error: #f7b5b5;
-    /* vermelho pastel */
 }
 
 * {
     box-sizing: border-box;
 }
 
-html,
-body {
-    height: 100%;
-}
-
 body {
     margin: 0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    font-family: system-ui, sans-serif;
     color: var(--text);
     background: var(--bg);
 }
 
 .container {
     max-width: 1100px;
-    margin: 24px auto;
-    padding: 0 16px;
+    margin: 0 auto;
+    padding: 1rem;
 }
 
 .header h1 {
-    margin: 0 0 8px;
-    font-size: clamp(22px, 3vw, 32px);
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
 }
 
 .muted {
     color: var(--muted);
+    font-size: 1rem;
+    font-weight: 700;
 }
 
 .toolbar {
-    margin-top: 12px;
     display: flex;
-    gap: 8px;
-    align-items: center;
     flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
 }
 
 .toolbar input[type="search"] {
-    flex: 1 1 280px;
-    padding: 10px 12px;
-    background: var(--row);
-    color: var(--text);
+    flex: 1 1 200px;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
     border: 1px solid var(--border);
-    border-radius: 8px;
-    outline: none;
+    border-radius: 6px;
+    background: var(--row);
 }
 
 .toolbar button {
-    padding: 10px 14px;
-    border-radius: 8px;
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
     border: 1px solid var(--border);
     background: linear-gradient(180deg, var(--accent-2), var(--accent));
     color: var(--text);
     font-weight: 500;
     cursor: pointer;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.toolbar button:hover {
-    filter: brightness(1.03);
 }
 
 .counter {
     margin-left: auto;
-    font-variant-numeric: tabular-nums;
+    align-self: center;
+    font-size: 0.875rem;
 }
 
 .status {
-    margin-top: 10px;
-    padding: 8px 12px;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
     border-radius: 6px;
     background: var(--row);
     border: 1px solid var(--border);
-    font-size: 14px;
-    min-height: 20px;
+    font-size: 0.875rem;
 }
 
 .table-wrap {
-    margin-top: 16px;
-    overflow: auto;
+    margin-top: 1rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 6px;
     background: var(--card);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    font-size: 14px;
+    border-collapse: collapse;
+    min-width: 500px;
 }
 
 thead th {
@@ -127,19 +101,16 @@ thead th {
     top: 0;
     background: var(--accent);
     color: var(--text);
-    text-align: left;
-    padding: 12px 14px;
+    padding: 0.75rem;
     border-bottom: 1px solid var(--border);
-    white-space: nowrap;
+    text-align: left;
     cursor: pointer;
-    user-select: none;
-    font-weight: 600;
 }
 
 thead th .sort {
+    margin-left: 0.5rem;
+    font-size: 0.75rem;
     opacity: 0.7;
-    font-size: 12px;
-    margin-left: 6px;
 }
 
 tbody tr:nth-child(odd) {
@@ -155,13 +126,36 @@ tbody tr:hover {
 }
 
 td {
-    padding: 10px 14px;
+    padding: 0.75rem;
     border-bottom: 1px solid var(--border);
-    vertical-align: top;
-    line-height: 1.35;
     white-space: nowrap;
 }
 
 .footer {
-    margin: 24px auto 40px;
+    margin-top: 2rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/* MOBILE-FIRST ADAPTATIONS */
+@media (max-width: 600px) {
+
+    thead th,
+    td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .toolbar input[type="search"] {
+        flex: 1 1 100%;
+    }
+
+    .toolbar button {
+        flex: 1 1 100%;
+    }
+
+    .counter {
+        flex: 1 1 100%;
+        text-align: right;
+    }
 }
