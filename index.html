@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Alterção de Escala COPOM</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- PapaParse para ler CSV com segurança -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <header class="container header">
+        <h1>Planilha publicada</h1>
+        <p class="muted">
+            Clique nos cabeçalhos para ordenar. Use o campo abaixo para filtrar.
+        </p>
+
+        <div class="toolbar">
+            <input id="q" type="search" placeholder="Filtrar (todas as colunas)..." />
+            <button id="btn-clear" aria-label="Limpar filtro">Limpar</button>
+            <span id="counter" class="counter" aria-live="polite"></span>
+        </div>
+        <div id="status" class="status" aria-live="polite"></div>
+    </header>
+
+    <main class="container">
+        <div class="table-wrap">
+            <table id="data-table">
+                <thead>
+                    <tr id="table-head"></tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="container footer">
+        <small class="muted">
+            Dica: para publicar outra aba/planilha, gere outro link CSV em
+            <em>Arquivo → Publicar na Web</em>.
+        </small>
+    </footer>
+</body>
+
+</html>
