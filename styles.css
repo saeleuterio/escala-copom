@@ -1,10 +1,10 @@
 :root {
-    --bg: #e8f0eb;          /* fundo principal verde claro */
+    --bg: #e0f8e9;          /* fundo principal verde claro */
     --card: #ffffff;        /* cartões/branco suave */
     --text: #183322;        /* texto verde-escuro */
     --muted: #4f6754;       /* texto secundário verde acinzentado */
-    --accent: #3e6b4d;      /* verde escuro principal */
-    --accent-2: #5a8b68;    /* verde médio */
+    --accent: #206e26;      /* verde escuro principal */
+    --accent-2: #23c94f;    /* verde médio */
     --border: #a5b8a8;      /* borda verde acinzentada */
     --row: #f0f6f2;         /* linha clara */
     --row-alt: #e2ece5;     /* linha alternada */
