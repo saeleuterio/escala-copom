@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ALTERAÇÃO DE ESCALA - AGOSTO - 2025</title>
+    <title>ALTERAÇÕES DE ESCALA - COPOM</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
     <script src="app.js" defer></script>
@@ -12,33 +12,19 @@
 
 <body>
     <header class="container header">
-        <h1>ALTERAÇÃO DE ESCALA - AGOSTO - 2025</h1>
+        <h1>ALTERAÇÕES DE ESCALA - COPOM</h1>
         <p class="muted">
-            Clique nos cabeçalhos para ordenar ou use o filtro.
+            Utilize o campo "filtrar" para pesquisar no documento.
         </p>
-
-        <div class="toolbar">
-            <input id="q" type="search" placeholder="Filtrar (todas as colunas)..." />
-            <button id="btn-clear" aria-label="Limpar filtro">Limpar</button>
-            <span id="counter" class="counter" aria-live="polite"></span>
-        </div>
-        <div id="status" class="status" aria-live="polite"></div>
     </header>
 
-    <main class="container">
-        <div class="table-wrap">
-            <table id="data-table">
-                <thead>
-                    <tr id="table-head"></tr>
-                </thead>
-                <tbody id="table-body"></tbody>
-            </table>
-        </div>
+    <main class="container" id="sheets-container">
+        <!-- O JS vai criar os containers das abas aqui -->
     </main>
 
     <footer class="container footer">
         <small class="muted">
-            Desenvolvido por Saulo Eleutério
+            Fonte: Google Sheets • Publicado como CSV
         </small>
     </footer>
 </body>

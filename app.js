@@ -1,46 +1,71 @@
-// Cole aqui o link CSV publicado do Google Sheets
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?output=csv";
+// === CONFIGURAÇÃO ===
+// Liste aqui cada aba que você publicou como CSV no Google Sheets
+const tabsConfig = [
+    { title: "ALTERAÇÃO DE ESCALA - AGOSTO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=886681670&single=true&output=csv" },
+    { title: "ALTERAÇÃO DE ESCALA - SETEMBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=1667330725&single=true&output=csv" },
+    { title: "ALTERAÇÃO DE ESCALA - OUTUBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=497698072&single=true&output=csv" },
+    { title: "ALTERAÇÃO DE ESCALA - NOVEMBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=1388325361&single=true&output=csv" },
+    { title: "ALTERAÇÃO DE ESCALA - DEZEMBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=1625844249&single=true&output=csv" }
+];
 
-let originalRows = [];
-let headers = [];
-let sortState = { key: null, dir: 1 };
+// Armazena dados de cada aba
+const sheetsData = {};
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("q").addEventListener("input", render);
-    document.getElementById("btn-clear").addEventListener("click", () => {
-        document.getElementById("q").value = "";
-        render();
+    const container = document.getElementById("sheets-container");
+    tabsConfig.forEach((tab, idx) => {
+        // Criar bloco HTML
+        const block = document.createElement("section");
+        block.className = "sheet-block";
+        block.innerHTML = `
+    <h2>${tab.title}</h2>
+    <div class="toolbar">
+        <input type="search" placeholder="Filtrar..." data-search="${idx}" />
+        <button data-clear="${idx}">Limpar</button>
+        <span class="counter" id="counter-${idx}"></span>
+    </div>
+    <div class="status" id="status-${idx}">Carregando...</div>
+    <div class="table-wrap">
+        <table>
+        <thead><tr id="thead-${idx}"></tr></thead>
+        <tbody id="tbody-${idx}"></tbody>
+        </table>
+    </div>
+    `;
+        container.appendChild(block);
+
+        // Eventos de busca/limpar
+        block.querySelector(`[data-search="${idx}"]`).addEventListener("input", () => render(idx));
+        block.querySelector(`[data-clear="${idx}"]`).addEventListener("click", () => {
+            block.querySelector(`[data-search="${idx}"]`).value = "";
+            render(idx);
+        });
+
+        // Carregar CSV dessa aba
+        loadSheet(idx, tab.url);
     });
-    loadSheet();
 });
 
-function loadSheet() {
-    if (!SHEET_CSV_URL) {
-        setStatus("⚠️ Defina SHEET_CSV_URL em app.js", "warn");
-        return;
-    }
-    setStatus("Carregando dados...");
-    Papa.parse(SHEET_CSV_URL, {
+function loadSheet(idx, url) {
+    Papa.parse(url, {
         download: true,
         header: true,
         skipEmptyLines: true,
         complete: (results) => {
-            headers = results.meta.fields || [];
-            originalRows = results.data;
-            if (!headers.length) {
-                setStatus("Planilha vazia ou sem cabeçalhos", "warn");
-                return;
-            }
-            buildHeader();
-            render();
-            setStatus(`Pronto. ${originalRows.length} registros.`);
+            const headers = results.meta.fields || [];
+            const rows = results.data || [];
+            sheetsData[idx] = { headers, rows, sort: { key: null, dir: 1 } };
+            buildHeader(idx);
+            render(idx);
+            setStatus(idx, `Pronto. ${rows.length} registros.`);
         },
-        error: () => setStatus("Erro ao carregar planilha", "error"),
+        error: () => setStatus(idx, "Erro ao carregar"),
     });
 }
 
-function buildHeader() {
-    const tr = document.getElementById("table-head");
+function buildHeader(idx) {
+    const { headers } = sheetsData[idx];
+    const tr = document.getElementById(`thead-${idx}`);
     tr.innerHTML = "";
     headers.forEach(h => {
         const th = document.createElement("th");
@@ -49,36 +74,39 @@ function buildHeader() {
         sortSpan.className = "sort";
         sortSpan.textContent = "↕";
         th.appendChild(sortSpan);
-        th.addEventListener("click", () => toggleSort(h));
+        th.addEventListener("click", () => toggleSort(idx, h));
         tr.appendChild(th);
     });
 }
 
-function toggleSort(key) {
-    if (sortState.key === key) {
-        sortState.dir *= -1;
+function toggleSort(idx, key) {
+    const s = sheetsData[idx].sort;
+    if (s.key === key) {
+        s.dir *= -1;
     } else {
-        sortState.key = key;
-        sortState.dir = 1;
+        s.key = key;
+        s.dir = 1;
     }
-    render();
+    render(idx);
 }
 
-function render() {
-    const q = document.getElementById("q").value.toLowerCase();
-    let rows = originalRows.filter(r =>
-        headers.some(h => String(r[h] || "").toLowerCase().includes(q))
+function render(idx) {
+    const data = sheetsData[idx];
+    const q = document.querySelector(`[data-search="${idx}"]`).value.toLowerCase();
+    let rows = data.rows.filter(r =>
+        data.headers.some(h => String(r[h] || "").toLowerCase().includes(q))
     );
-    if (sortState.key) {
-        const { key, dir } = sortState;
+    if (data.sort.key) {
+        const { key, dir } = data.sort;
         rows.sort((a, b) => String(a[key]).localeCompare(String(b[key]), "pt-BR") * dir);
     }
-    paintBody(rows);
-    document.getElementById("counter").textContent = `${rows.length} / ${originalRows.length}`;
+    paintBody(idx, rows);
+    document.getElementById(`counter-${idx}`).textContent = `${rows.length} / ${data.rows.length}`;
 }
 
-function paintBody(rows) {
-    const tbody = document.getElementById("table-body");
+function paintBody(idx, rows) {
+    const tbody = document.getElementById(`tbody-${idx}`);
+    const { headers } = sheetsData[idx];
     tbody.innerHTML = "";
     rows.forEach(r => {
         const tr = document.createElement("tr");
@@ -91,8 +119,6 @@ function paintBody(rows) {
     });
 }
 
-function setStatus(msg, kind) {
-    const el = document.getElementById("status");
-    el.textContent = msg;
-    el.className = `status ${kind || ""}`;
+function setStatus(idx, msg) {
+    document.getElementById(`status-${idx}`).textContent = msg;
 }

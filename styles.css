@@ -35,8 +35,21 @@ body {
 
 .muted {
     color: var(--muted);
-    font-size: 1rem;
-    font-weight: 700;
+}
+
+.sheet-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sheet-block h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: var(--text);
 }
 
 .toolbar {
@@ -85,9 +98,6 @@ body {
     margin-top: 1rem;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--card);
 }
 
 table {
@@ -137,7 +147,6 @@ td {
     text-align: center;
 }
 
-/* MOBILE-FIRST ADAPTATIONS */
 @media (max-width: 600px) {
 
     thead th,
@@ -146,16 +155,8 @@ td {
         font-size: 0.8rem;
     }
 
-    .toolbar input[type="search"] {
-        flex: 1 1 100%;
-    }
-
+    .toolbar input[type="search"],
     .toolbar button {
         flex: 1 1 100%;
-    }
-
-    .counter {
-        flex: 1 1 100%;
-        text-align: right;
     }
 }
