@@ -134,6 +134,7 @@ table {
     border-collapse: separate;
     border-spacing: 0;
     font-size: 1.1rem;
+    font-weight: 400;
 }
 
 thead th {
