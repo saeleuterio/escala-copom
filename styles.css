@@ -48,7 +48,9 @@ body {
 
 .sheet-block h2 {
     margin-top: 0;
-    font-size: 1.25rem;
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
     color: var(--text);
 }
 
