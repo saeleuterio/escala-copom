@@ -57,7 +57,7 @@ function loadSheet(idx, url) {
             sheetsData[idx] = { headers, rows, sort: { key: null, dir: 1 } };
             buildHeader(idx);
             render(idx);
-            setStatus(idx, `Pronto. ${rows.length} registros.`);
+            setStatus(idx, `${rows.length} registros.`);
         },
         error: () => setStatus(idx, "Erro ao carregar"),
     });
