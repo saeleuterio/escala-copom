@@ -1,30 +1,17 @@
 :root {
-    --bg: #f4f8f5;
-    /* fundo principal verde muito claro */
-    --card: #ffffff;
-    /* cartões/branco suave */
-    --text: #1f3324;
-    /* texto principal verde-escuro */
-    --muted: #5f7261;
-    /* texto secundário verde acinzentado */
-    --accent: #a8d5ba;
-    /* verde pastel médio */
-    --accent-2: #cce8d7;
-    /* verde pastel claro */
-    --border: #c4d6c8;
-    /* borda verde acinzentada clara */
-    --row: #f2f9f4;
-    /* linha clara */
-    --row-alt: #e9f3eb;
-    /* linha alternada */
-    --row-hover: #d9ebdd;
-    /* hover suave */
-    --success: #8ccf9d;
-    /* verde de sucesso */
-    --warning: #d5e6b8;
-    /* verde amarelado */
-    --error: #f2c8c8;
-    /* vermelho pastel para erros */
+    --bg: #e8f0eb;          /* fundo principal verde claro */
+    --card: #ffffff;        /* cartões/branco suave */
+    --text: #183322;        /* texto verde-escuro */
+    --muted: #4f6754;       /* texto secundário verde acinzentado */
+    --accent: #3e6b4d;      /* verde escuro principal */
+    --accent-2: #5a8b68;    /* verde médio */
+    --border: #a5b8a8;      /* borda verde acinzentada */
+    --row: #f0f6f2;         /* linha clara */
+    --row-alt: #e2ece5;     /* linha alternada */
+    --row-hover: #cfe0d3;   /* hover suave */
+    --success: #4d8d5f;     /* verde de sucesso */
+    --warning: #c9d9a4;     /* verde amarelado */
+    --error: #e6b3b3;       /* vermelho pastel para erros */
 }
 
 * {
@@ -56,20 +43,13 @@ body {
     font-size: clamp(22px, 3vw, 32px);
 }
 
-h1 {
-    display: flex;
-    justify-content: center;
-}
-
-h2 {
+h1, h2, .muted {
     display: flex;
     justify-content: center;
 }
 
 .muted {
     color: var(--muted);
-    display: flex;
-    justify-content: center;
 }
 
 .toolbar {
@@ -95,14 +75,14 @@ h2 {
     border-radius: 8px;
     border: 1px solid var(--border);
     background: linear-gradient(180deg, var(--accent-2), var(--accent));
-    color: var(--text);
+    color: #fff;
     font-weight: 500;
     cursor: pointer;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .toolbar button:hover {
-    filter: brightness(1.03);
+    filter: brightness(1.05);
 }
 
 .counter {
@@ -141,7 +121,7 @@ thead th {
     position: sticky;
     top: 0;
     background: var(--accent);
-    color: var(--text);
+    color: #fff;
     text-align: left;
     padding: 12px 14px;
     border-bottom: 1px solid var(--border);
@@ -152,9 +132,10 @@ thead th {
 }
 
 thead th .sort {
-    opacity: 0.7;
+    opacity: 0.8;
     font-size: 12px;
     margin-left: 6px;
+    color: #d4e3d8;
 }
 
 tbody tr:nth-child(odd) {
