@@ -156,6 +156,7 @@ td {
     vertical-align: top;
     line-height: 1.35;
     white-space: nowrap;
+    font-weight: 500;
 }
 
 .footer {
