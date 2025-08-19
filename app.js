@@ -13,8 +13,9 @@ const sheetsData = {};
 
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("sheets-container");
+
+    // Criar containers para cada aba
     tabsConfig.forEach((tab, idx) => {
-        // Criar bloco HTML
         const block = document.createElement("section");
         block.className = "sheet-block";
         block.innerHTML = `
@@ -43,6 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Carregar CSV dessa aba
         loadSheet(idx, tab.url);
+    });
+
+    // Eventos dos botões de PDF
+    document.querySelectorAll(".pdf-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const pdf = btn.dataset.pdf;
+            window.open(pdf, "_blank");
+        });
     });
 });
 

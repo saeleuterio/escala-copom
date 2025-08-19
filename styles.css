@@ -1,26 +1,21 @@
 :root {
-    --bg: #e0f8e9;          /* fundo principal verde claro */
-    --card: #ffffff;        /* cartões/branco suave */
-    --text: #183322;        /* texto verde-escuro */
-    --muted: #4f6754;       /* texto secundário verde acinzentado */
-    --accent: #206e26;      /* verde escuro principal */
-    --accent-2: #23c94f;    /* verde médio */
-    --border: #a5b8a8;      /* borda verde acinzentada */
-    --row: #f0f6f2;         /* linha clara */
-    --row-alt: #e2ece5;     /* linha alternada */
-    --row-hover: #9fa8a1;   /* hover suave */
-    --success: #4d8d5f;     /* verde de sucesso */
-    --warning: #c9d9a4;     /* verde amarelado */
-    --error: #e6b3b3;       /* vermelho pastel para erros */
+    --bg: #e0f8e9;
+    --card: #ffffff;
+    --text: #183322;
+    --muted: #4f6754;
+    --accent: #206e26;
+    --accent-2: #23c94f;
+    --border: #a5b8a8;
+    --row: #f0f6f2;
+    --row-alt: #e2ece5;
+    --row-hover: #cfe0d3;
+    --success: #4d8d5f;
+    --warning: #c9d9a4;
+    --error: #e6b3b3;
 }
 
 * {
     box-sizing: border-box;
-}
-
-html,
-body {
-    height: 100%;
 }
 
 body {
@@ -38,20 +33,51 @@ body {
     padding: 0 16px;
 }
 
-.header h1 {
-    margin: 0 0 8px;
-    font-size: clamp(22px, 3vw, 32px);
+/* ===== Container dos PDFs ===== */
+.pdf-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 16px auto;
+    flex-wrap: wrap;
 }
 
-h1, h2, .muted {
-    display: flex;
-    justify-content: center;
+.pdf-btn {
+    flex: 1 1 120px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--accent-2), var(--accent));
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+.pdf-btn:hover {
+    filter: brightness(1.1);
+    transform: scale(1.03);
+}
+
+/* ===== Header ===== */
+.header {
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: clamp(22px, 3vw, 32px);
 }
 
 .muted {
     color: var(--muted);
+    margin-top: 8px;
+    display: block;
 }
 
+/* ===== Toolbar ===== */
 .toolbar {
     margin-top: 12px;
     display: flex;
@@ -90,6 +116,7 @@ h1, h2, .muted {
     font-variant-numeric: tabular-nums;
 }
 
+/* ===== Status ===== */
 .status {
     margin-top: 10px;
     padding: 8px 12px;
@@ -100,6 +127,7 @@ h1, h2, .muted {
     min-height: 20px;
 }
 
+/* ===== Table ===== */
 .table-wrap {
     margin-top: 16px;
     overflow: auto;
@@ -159,6 +187,7 @@ td {
     font-weight: 500;
 }
 
+/* ===== Footer ===== */
 .footer {
     margin: 24px auto 40px;
     display: flex;
