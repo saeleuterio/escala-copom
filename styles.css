@@ -210,3 +210,31 @@ td {
     font-size: 1.25rem;
     font-weight: 700;
 }
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+    .pdf-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pdf-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .logo {
+        width: 60px;
+        margin: 8px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        width: 50px;
+    }
+
+    .pdf-btn {
+        flex: 1 1 100%;
+    }
+}
