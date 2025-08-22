@@ -12,37 +12,63 @@
 </head>
 
 <body>
-    <!-- Container com os 7 botões para PDFs e logo -->
-    <nav class="pdf-container container">
-        <img src="./img/copom.png" alt="Logo COPOM" class="logo">
-        <div class="pdf-buttons">
-            <button class="pdf-btn" data-pdf="https://drive.google.com/file/d/1QQMIFMD3piG3UmnjCVIunZqUSc3GtKaZ/view?usp=sharing">ESCALA INPO 04SET25</button>
-            <button class="pdf-btn" data-pdf="https://drive.google.com/file/d/1-HZNWjcnYXsWNv5akr0IKLxG8mA1tKG2/view?usp=sharing">ESCALA INPO 11SET25</button>
-            <button class="pdf-btn" data-pdf="https://drive.google.com/file/d/157wZ2PQIDWKepR3diP-Ui5qNiapQONHM/view?usp=sharing">ESCALA INPO 18SET25</button>
-            <button class="pdf-btn" data-pdf="https://drive.google.com/file/d/14b9xM8B8Gr2B8pr34ZlYEpWoTqjD1vLc/view?usp=sharing">ESCALA INPO 25SET25</button>
-            <button class="pdf-btn" data-pdf="https://drive.google.com/file/d/1ohG4hkuLq2TYppGrNkuHijPC_RxGTDsa/view?usp=sharing">ESCALA INPO 09OUT25</button>
-            <button class="pdf-btn" data-pdf="https://drive.google.com/file/d/1aK0ijc_vi_kCHJ9vhvb9r0aD57fu2WLQ/view?usp=sharing">ESCALA INPO 16OUT25</button>
-            <button class="pdf-btn" data-pdf="https://drive.google.com/file/d/16lRJbi5fpI6ln-8X-d4iNdKRCMb100sD/view?usp=sharing">FÉRIAS 2025</button>
-        </div>
-        <img src="./img/copom.png" alt="Logo COPOM" class="logo">
-    </nav>
+    <!-- Splash Screen -->
+    <div id="splash">
+        <img src="./img/LOGO COPOM BRANCO.png" alt="Logo COPOM" class="splash-logo" />
+    </div>
 
-    <header class="container header">
-        <h1>ALTERAÇÕES DE ESCALA - COPOM</h1>
-        <p class="muted">
-            Utilize o campo "filtrar" para pesquisar no documento.
-        </p>
-    </header>
+    <!-- Conteúdo Principal -->
+    <div id="main-content" style="display:none;">
+        <!-- Container com os 7 botões para PDFs e logo -->
+        <nav class="pdf-container container">
+            <img src="./img/copom.png" alt="Logo COPOM" class="logo">
+            <div class="pdf-buttons">
+                <button class="pdf-btn"
+                    data-pdf="https://drive.google.com/file/d/1QQMIFMD3piG3UmnjCVIunZqUSc3GtKaZ/view?usp=sharing">ESCALA
+                    INPO
+                    04SET25</button>
+                <button class="pdf-btn"
+                    data-pdf="https://drive.google.com/file/d/1-HZNWjcnYXsWNv5akr0IKLxG8mA1tKG2/view?usp=sharing">ESCALA
+                    INPO
+                    11SET25</button>
+                <button class="pdf-btn"
+                    data-pdf="https://drive.google.com/file/d/157wZ2PQIDWKepR3diP-Ui5qNiapQONHM/view?usp=sharing">ESCALA
+                    INPO
+                    18SET25</button>
+                <button class="pdf-btn"
+                    data-pdf="https://drive.google.com/file/d/14b9xM8B8Gr2B8pr34ZlYEpWoTqjD1vLc/view?usp=sharing">ESCALA
+                    INPO
+                    25SET25</button>
+                <button class="pdf-btn"
+                    data-pdf="https://drive.google.com/file/d/1ohG4hkuLq2TYppGrNkuHijPC_RxGTDsa/view?usp=sharing">ESCALA
+                    INPO
+                    09OUT25</button>
+                <button class="pdf-btn"
+                    data-pdf="https://drive.google.com/file/d/1aK0ijc_vi_kCHJ9vhvb9r0aD57fu2WLQ/view?usp=sharing">ESCALA
+                    INPO
+                    16OUT25</button>
+                <button class="pdf-btn"
+                    data-pdf="https://drive.google.com/file/d/16lRJbi5fpI6ln-8X-d4iNdKRCMb100sD/view?usp=sharing">FÉRIAS
+                    2025</button>
+            </div>
+            <img src="./img/copom.png" alt="Logo COPOM" class="logo">
+        </nav>
 
-    <main class="container" id="sheets-container">
-        <!-- O JS vai criar os containers das abas aqui -->
-    </main>
+        <header class="container header">
+            <h1>ALTERAÇÕES DE ESCALA - COPOM</h1>
+            <p class="muted">Utilize o campo "filtrar" para pesquisar no documento.</p>
+        </header>
 
-    <footer class="container footer">
-        <small class="muted">
-            © 2025 | Desenvolvido por Saulo Eleutério
-        </small>
-    </footer>
+        <main class="container" id="sheets-container">
+            <!-- O JS vai criar os containers das abas aqui -->
+        </main>
+
+        <footer class="container footer">
+            <small class="muted">
+                © 2025 | Desenvolvido por Saulo Eleutério
+            </small>
+        </footer>
+    </div>
 </body>
 
 </html>
