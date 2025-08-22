@@ -53,12 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
             window.open(pdf, "_blank");
         });
     });
-
-    // Controle do splash screen
-    setTimeout(() => {
-        document.getElementById("splash").style.display = "none";
-        document.getElementById("main-content").style.display = "block";
-    }, 6000); // após 6 segundos
 });
 
 function loadSheet(idx, url) {
