@@ -88,6 +88,7 @@ body {
 
 .muted {
     color: var(--muted);
+    font-weight: 600;
     margin-top: 8px;
     display: block;
 }
