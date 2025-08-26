@@ -8,6 +8,7 @@ const tabsConfig = [
     { title: "DEZEMBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=1625844249&single=true&output=csv" }
 ];
 
+
 // Armazena dados de cada aba
 const sheetsData = {};
 
