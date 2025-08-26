@@ -1,5 +1,4 @@
 // === CONFIGURAÇÃO ===
-// Liste aqui cada aba que você publicou como CSV no Google Sheets
 const tabsConfig = [
     { title: "AGOSTO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=589847056&single=true&output=csv" },
     { title: "SETEMBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=1667330725&single=true&output=csv" },
@@ -8,7 +7,6 @@ const tabsConfig = [
     { title: "DEZEMBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=1625844249&single=true&output=csv" }
 ];
 
-// Armazena dados de cada aba
 const sheetsData = {};
 
 document.addEventListener("DOMContentLoaded", () => {
