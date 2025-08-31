@@ -1,10 +1,10 @@
 // === CONFIGURAÇÃO ===
 const tabsConfig = [
-    { title: "AGOSTO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=589847056&single=true&output=csv" },
     { title: "SETEMBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=1667330725&single=true&output=csv" },
     { title: "OUTUBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=497698072&single=true&output=csv" },
     { title: "NOVEMBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=1388325361&single=true&output=csv" },
-    { title: "DEZEMBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=1625844249&single=true&output=csv" }
+    { title: "DEZEMBRO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=1625844249&single=true&output=csv" },
+    { title: "AGOSTO 2025", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=589847056&single=true&output=csv" }
 ];
 
 const sheetsData = {};
