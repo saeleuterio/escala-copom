@@ -186,7 +186,7 @@ body {
 }
 
 /* Scanner animado */
-.table-wrap::before {
+/* .table-wrap::before {
     content: "";
     position: absolute;
     top: -100%;
@@ -196,7 +196,7 @@ body {
     background: linear-gradient(to bottom, rgba(35, 201, 79, 0.12), transparent);
     animation: scan 6s linear infinite;
     pointer-events: none;
-}
+} */
 
 @keyframes scan {
     0% { top: -100%; }
