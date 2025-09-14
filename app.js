@@ -17,20 +17,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const block = document.createElement("section");
         block.className = "sheet-block";
         block.innerHTML = `
-    <h2>${tab.title}</h2>
-    <div class="toolbar">
-        <input type="search" placeholder="Filtrar..." data-search="${idx}" />
-        <button data-clear="${idx}">Limpar</button>
-        <span class="counter" id="counter-${idx}"></span>
-    </div>
-    <div class="status" id="status-${idx}">Carregando...</div>
-    <div class="table-wrap">
-        <table>
-        <thead><tr id="thead-${idx}"></tr></thead>
-        <tbody id="tbody-${idx}"></tbody>
-        </table>
-    </div>
-    `;
+            <h2>${tab.title}</h2>
+            <div class="toolbar">
+                <input type="search" placeholder="Filtrar..." data-search="${idx}" />
+                <button data-clear="${idx}">Limpar</button>
+                <span class="counter" id="counter-${idx}"></span>
+            </div>
+            <div class="status" id="status-${idx}">Carregando...</div>
+            <div class="table-wrap">
+                <table>
+                <thead><tr id="thead-${idx}"></tr></thead>
+                <tbody id="tbody-${idx}"></tbody>
+                </table>
+            </div>
+        `;
         container.appendChild(block);
 
         // Eventos de busca/limpar
@@ -64,9 +64,9 @@ function loadSheet(idx, url) {
             sheetsData[idx] = { headers, rows, sort: { key: null, dir: 1 } };
             buildHeader(idx);
             render(idx);
-            setStatus(idx, `${rows.length} registros.`);
+            setStatus(idx, `${rows.length} registros carregados.`);
         },
-        error: () => setStatus(idx, "Erro ao carregar"),
+        error: () => setStatus(idx, "Erro ao carregar dados"),
     });
 }
 
@@ -95,6 +95,19 @@ function toggleSort(idx, key) {
         s.dir = 1;
     }
     render(idx);
+    
+    // Atualizar indicadores visuais de ordenação
+    const thead = document.getElementById(`thead-${idx}`);
+    thead.querySelectorAll('.sort').forEach((span, index) => {
+        const header = sheetsData[idx].headers[index];
+        if (header === key) {
+            span.textContent = s.dir === 1 ? "↑" : "↓";
+            span.style.opacity = "1";
+        } else {
+            span.textContent = "↕";
+            span.style.opacity = "0.8";
+        }
+    });
 }
 
 function render(idx) {
@@ -103,10 +116,12 @@ function render(idx) {
     let rows = data.rows.filter(r =>
         data.headers.some(h => String(r[h] || "").toLowerCase().includes(q))
     );
+    
     if (data.sort.key) {
         const { key, dir } = data.sort;
         rows.sort((a, b) => String(a[key]).localeCompare(String(b[key]), "pt-BR") * dir);
     }
+    
     paintBody(idx, rows);
     document.getElementById(`counter-${idx}`).textContent = `${rows.length} / ${data.rows.length}`;
 }
@@ -115,6 +130,7 @@ function paintBody(idx, rows) {
     const tbody = document.getElementById(`tbody-${idx}`);
     const { headers } = sheetsData[idx];
     tbody.innerHTML = "";
+    
     rows.forEach(r => {
         const tr = document.createElement("tr");
         headers.forEach(h => {
@@ -124,6 +140,19 @@ function paintBody(idx, rows) {
         });
         tbody.appendChild(tr);
     });
+    
+    // Se não há dados para mostrar
+    if (rows.length === 0) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = headers.length;
+        td.textContent = "Nenhum registro encontrado";
+        td.style.textAlign = "center";
+        td.style.fontStyle = "italic";
+        td.style.color = "var(--muted)";
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+    }
 }
 
 function setStatus(idx, msg) {
