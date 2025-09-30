@@ -11,7 +11,7 @@ Sistema desenvolvido para facilitar a consulta de alterações de escala dos pol
 
 ### ✨ Funcionalidades
 
-- 📊 Visualização de escalas por mês (Setembro a Dezembro 2025)
+- 📊 Visualização de escalas por mês
 - 🔍 Sistema de busca/filtro em tempo real
 - ↕️ Ordenação de colunas (ascendente/descendente)
 - 📄 Acesso rápido a documentos PDF importantes
@@ -29,7 +29,7 @@ Sistema desenvolvido para facilitar a consulta de alterações de escala dos pol
 
 ## 📦 Estrutura do Projeto
 
-```
+```bash
 copom-escalas/
 │
 ├── index.html          # Página principal
@@ -51,14 +51,16 @@ copom-escalas/
 ### Instalação
 
 1. Clone o repositório:
+
 ```bash
 git clone https://github.com/seu-usuario/copom-escalas.git
 cd copom-escalas
 ```
 
-2. Abra o arquivo `index.html` diretamente no navegador ou use um servidor local:
+1. Abra o arquivo `index.html` diretamente no navegador ou use um servidor local:
 
-**Opção 1: Abrir diretamente**
+#### Opção 1: Abrir diretamente
+
 ```bash
 # No Windows
 start index.html
@@ -70,7 +72,8 @@ open index.html
 xdg-open index.html
 ```
 
-**Opção 2: Servidor local (Python)**
+#### Opção 2: Servidor local (Python)
+
 ```bash
 # Python 3
 python -m http.server 8000
@@ -81,7 +84,8 @@ python -m SimpleHTTPServer 8000
 
 Acesse: `http://localhost:8000`
 
-**Opção 3: Servidor local (Node.js)**
+#### Opção 3: Servidor local (Node.js)
+
 ```bash
 npx serve
 ```
@@ -151,6 +155,7 @@ Edite as variáveis no arquivo `styles.css`:
 ### Logo
 
 Substitua as imagens em `img/`:
+
 - `copom.png` - Logo principal (recomendado: 200x200px)
 - `favicon.png` - Ícone do navegador (recomendado: 32x32px)
 
@@ -230,7 +235,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 👤 Autor
 
-**Saulo Eleutério**
+### Saulo Eleutério
 
 - GitHub: [@seueleuterio](https://github.com/seueleuterio)
 
@@ -241,6 +246,7 @@ Para suporte, entre em contato através do GitHub Issues ou pelo email instituci
 ## 🔄 Atualizações
 
 ### Versão 1.0.0 (Setembro 2025)
+
 - ✅ Lançamento inicial
 - ✅ Sistema de abas por mês
 - ✅ Busca e filtros
@@ -252,4 +258,4 @@ Para suporte, entre em contato através do GitHub Issues ou pelo email instituci
 
 ⭐ Se este projeto foi útil, considere dar uma estrela no GitHub!
 
-**Desenvolvido com 💚 para a Polícia Militar**
+## Desenvolvido para a Polícia Militar
