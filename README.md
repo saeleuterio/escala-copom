@@ -245,7 +245,7 @@ Para suporte, entre em contato através do GitHub Issues ou pelo email instituci
 
 ## 🔄 Atualizações
 
-### Versão 1.0.0 (Setembro 2025)
+### Versão 1.0.0 (Agosto 2025)
 
 - ✅ Lançamento inicial
 - ✅ Sistema de abas por mês
