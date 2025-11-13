@@ -45,14 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Carregar CSV dessa aba
         loadSheet(idx, tab.url);
     });
-
-    // Eventos dos botões de PDF
-    document.querySelectorAll(".pdf-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const pdf = btn.dataset.pdf;
-            window.open(pdf, "_blank");
-        });
-    });
 });
 
 function loadSheet(idx, url) {
