@@ -327,14 +327,21 @@ td {
     .toolbar {
         flex-direction: column;
         align-items: stretch;
+        gap: 10px;
     }
 
     .toolbar input[type="search"] {
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .toolbar button {
         width: 100%;
     }
 
     .counter {
         margin-left: 0;
         text-align: center;
+        width: 100%;
     }
 }
