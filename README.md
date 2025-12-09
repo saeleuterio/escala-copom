@@ -1,261 +1,612 @@
-# 🚔 Sistema de Alterações de Escala - COPOM
-
-Sistema web para visualização e gerenciamento de alterações de escala do Centro de Operações da Polícia Militar (COPOM).
-
-![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+# 📊 Alterações de Escala - COPOM
 
 ## 📋 Sobre o Projeto
 
-Sistema desenvolvido para facilitar a consulta de alterações de escala dos policiais militares, permitindo filtrar, ordenar e visualizar dados de múltiplos meses de forma organizada e intuitiva.
+Sistema web para visualização e consulta das **Alterações de Escala do Centro de Operações da Polícia Militar (COPOM)** - CPI-10. A aplicação importa dados diretamente de planilhas do Google Sheets publicadas como CSV, oferecendo busca, filtros e ordenação em tempo real para múltiplos meses.
 
-### ✨ Funcionalidades
+![Screenshot do Sistema](./img/screenshot.png)
 
-- 📊 Visualização de escalas por mês
-- 🔍 Sistema de busca/filtro em tempo real
-- ↕️ Ordenação de colunas (ascendente/descendente)
-- 📄 Acesso rápido a documentos PDF importantes
-- 📱 Interface responsiva para desktop e mobile
-- 📈 Contador de registros filtrados
-- 🎨 Design moderno com tema verde institucional
+## ✨ Funcionalidades Principais
 
-## 🚀 Tecnologias Utilizadas
+### 📅 Múltiplas Abas Mensais
 
-- **HTML5** - Estrutura da página
-- **CSS3** - Estilização e responsividade
-- **JavaScript (ES6+)** - Lógica da aplicação
-- **PapaParse** - Parsing de arquivos CSV
-- **Google Sheets** - Fonte de dados (CSV publicado)
+- **Visualização por Mês**: Abas separadas para cada período (Dezembro 2025, Janeiro 2026, etc.)
+- **Importação Automática**: Carrega dados diretamente do Google Sheets
+- **Atualização Dinâmica**: Sincroniza automaticamente com as planilhas
 
-## 📦 Estrutura do Projeto
+### 🔍 Busca e Filtros Avançados
 
-```bash
-copom-escalas/
+- **Busca em Tempo Real**: Filtra instantaneamente em todas as colunas
+- **Contador Dinâmico**: Mostra registros filtrados / total
+- **Botão Limpar**: Reseta filtros rapidamente
+- **Case-insensitive**: Busca sem diferenciar maiúsculas/minúsculas
+
+### 🔄 Ordenação Inteligente
+
+- **Clique para Ordenar**: Clique em qualquer cabeçalho de coluna
+- **Ordem Crescente/Decrescente**: Alterna entre ASC e DESC
+- **Indicador Visual**: Símbolo ↕ mostra possibilidade de ordenação
+- **Ordenação em Português**: Respeita acentuação e caracteres especiais
+
+### 🔗 Links de Acesso Rápido
+
+Barra de navegação com 14 links diretos:
+
+- Férias 2026
+- POP COPOM
+- Diretriz SisCOPOM
+- Ordens de Serviço
+- Minha Área SP - SEI
+- Lista Telefônica
+- Passo a passo Assinatura DEJEM
+- Controle de Escalas DEJEM
+- CPI - Escala Oficial Superior
+- Numerador 2025
+- Ocorrências Policiamento Ambiental
+- Ramais Policiamento Ambiental
+- E mais...
+
+## 🛠️ Tecnologias Utilizadas
+
+### Frontend
+
+- **HTML5**: Estrutura semântica e acessível
+- **CSS3**:
+  - Variáveis CSS para tema verde/floresta
+  - Layout responsivo com flexbox
+  - Animações neon piscantes no header
+  - Grid de fundo animado
+  - Hover effects e transições suaves
+- **JavaScript ES6+**:
+  - Manipulação DOM otimizada
+  - Programação orientada a eventos
+  - Funções modulares e reutilizáveis
+
+### Bibliotecas
+
+- **PapaParse 5.4.1**: Parser CSV robusto
+  - Download direto de URLs
+  - Detecção automática de headers
+  - Skip de linhas vazias
+  - Tratamento de erros
+
+### Integração
+
+- **Google Sheets**: Base de dados
+  - Publicação como CSV
+  - URLs públicas por aba (gid)
+  - Atualização em tempo real
+
+## 📁 Estrutura do Projeto
+
+```
+escalas-copom/
 │
 ├── index.html          # Página principal
-├── app.js              # Lógica da aplicação
-├── styles.css          # Estilos
-├── img/
-│   ├── favicon.png     # Ícone do site
-│   └── copom.png       # Logo COPOM
-└── README.md           # Documentação
+├── styles.css          # Estilos e animações
+├── app.js              # Lógica e importação CSV
+├── README.md           # Documentação
+│
+└── img/
+    ├── favicon.png           # Ícone da página
+    ├── LOGO COPOM BRANCO.png # Logo COPOM (usado 2x)
+    └── screenshot.png        # Screenshot do projeto
 ```
 
-## 🔧 Instalação e Configuração
+## 🚀 Como Usar
 
-### Pré-requisitos
+### Instalação Local
 
-- Navegador web moderno (Chrome, Firefox, Safari, Edge)
-- Servidor web local (opcional para desenvolvimento)
-
-### Instalação
-
-1. Clone o repositório:
+#### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/copom-escalas.git
-cd copom-escalas
+git clone https://github.com/seu-usuario/escalas-copom.git
+cd escalas-copom
 ```
 
-1. Abra o arquivo `index.html` diretamente no navegador ou use um servidor local:
+#### 2. Abra o sistema
 
-#### Opção 1: Abrir diretamente
-
-```bash
-# No Windows
-start index.html
-
-# No Mac
-open index.html
-
-# No Linux
-xdg-open index.html
-```
-
-#### Opção 2: Servidor local (Python)
+**Opção A: Servidor Local (Recomendado)**
 
 ```bash
-# Python 3
+# Com Python 3
 python -m http.server 8000
 
-# Python 2
-python -m SimpleHTTPServer 8000
+# Com Node.js
+npx http-server
+
+# Com PHP
+php -S localhost:8000
 ```
 
-Acesse: `http://localhost:8000`
+**Opção B: Abrir Diretamente**
 
-#### Opção 3: Servidor local (Node.js)
+- Dê um duplo clique em `index.html`
+- ⚠️ Alguns navegadores podem bloquear requisições de arquivos locais
 
-```bash
-npx serve
+#### 3. Acesse no navegador
+
+```
+http://localhost:8000
 ```
 
-## ⚙️ Configuração
+### Configuração do Google Sheets
 
-### Adicionar ou Modificar Abas de Meses
+#### Como Publicar uma Planilha como CSV
 
-No arquivo `app.js`, edite o array `tabsConfig`:
+1. **Abra sua planilha no Google Sheets**
 
-```javascript
-const tabsConfig = [
-    { 
-        title: "JANEIRO 2026", 
-        url: "URL_DO_CSV_PUBLICADO" 
-    },
-    // Adicione mais meses conforme necessário
-];
+2. **Publique na Web:**
+   - Clique em "Arquivo" → "Compartilhar" → "Publicar na Web"
+   - Escolha a aba específica que deseja publicar
+   - Selecione formato: **Valores separados por vírgula (.csv)**
+   - Clique em "Publicar"
+
+3. **Copie a URL gerada:**
+
+   ```
+   https://docs.google.com/spreadsheets/d/e/2PACX-[ID]/pub?gid=[GID]&single=true&output=csv
+   ```
+
+4. **Adicione no `app.js`:**
+
+   ```javascript
+   const tabsConfig = [
+       { 
+           title: "DEZEMBRO 2025", 
+           url: "SUA_URL_AQUI" 
+       },
+       // ... mais abas
+   ];
+   ```
+
+#### Estrutura da Planilha
+
+A planilha deve ter:
+
+- **Primeira linha**: Cabeçalhos (nomes das colunas)
+- **Linhas seguintes**: Dados
+- **Sem linhas vazias** no meio dos dados
+
+Exemplo:
+
+```
+Nome    | Função  | Horário | Data
+--------|---------|---------|----------
+João    | ATCPO   | 08-16h  | 01/12/25
+Maria   | TELE    | 16-00h  | 01/12/25
 ```
 
-### Como Obter URL do Google Sheets
+### Adicionando Novas Abas
 
-1. Abra sua planilha no Google Sheets
-2. Vá em **Arquivo** → **Compartilhar** → **Publicar na Web**
-3. Selecione a aba específica
-4. Escolha formato **CSV**
-5. Clique em **Publicar**
-6. Copie a URL gerada
+1. **Edite o arquivo `app.js`**
 
-### Adicionar Novos Botões PDF
+2. **Adicione no array `tabsConfig`:**
 
-No arquivo `index.html`, dentro da `<div class="pdf-buttons">`:
+   ```javascript
+   const tabsConfig = [
+       { title: "DEZEMBRO 2025", url: "URL_DA_ABA_1" },
+       { title: "JANEIRO 2026", url: "URL_DA_ABA_2" },
+       { title: "NOVO MÊS", url: "URL_DA_NOVA_ABA" }, // ← Nova aba
+   ];
+   ```
+
+3. **Para comentar/desabilitar uma aba:**
+
+   ```javascript
+   // { title: "NOVEMBRO 2025", url: "..." }, // ← Aba desabilitada
+   ```
+
+### Atualizando Links da Navegação
+
+Edite o `index.html` na seção `<nav class="nav-links">`:
 
 ```html
-<button class="pdf-btn" data-pdf="URL_DO_ARQUIVO">
-    NOME DO BOTÃO
-</button>
+<a href="URL_DO_DOCUMENTO" target="_blank" class="nav-link">
+    NOME DO LINK
+</a>
 ```
 
-## 📊 Formato dos Dados CSV
+Para desabilitar temporariamente:
 
-O sistema espera arquivos CSV com cabeçalhos na primeira linha. Exemplo:
-
-```csv
-Nome,Matrícula,Unidade,Data,Observação
-João Silva,123456,1º BPM,01/09/2025,Folga
-Maria Santos,789012,2º BPM,02/09/2025,Serviço
+```html
+<!-- <a href="URL" target="_blank" class="nav-link">LINK</a> -->
 ```
 
-## 🎨 Personalização
+## 🎨 Design e Interface
 
-### Cores (variáveis CSS)
-
-Edite as variáveis no arquivo `styles.css`:
+### Paleta de Cores - Tema Verde/Floresta
 
 ```css
-:root {
-    --bg: #e0f8e9;           /* Cor de fundo */
-    --card: #ffffff;          /* Cor dos cards */
-    --text: #183322;          /* Cor do texto */
-    --accent: #206e26;        /* Cor principal */
-    --accent-2: #23c94f;      /* Cor secundária */
-    /* ... outras variáveis */
+/* Cores Principais */
+--bg: #e0f8e9           /* Fundo verde claro */
+--card: #ffffff         /* Cards brancos */
+--text: #183322         /* Texto verde escuro */
+--accent: #206e26       /* Verde principal */
+--accent-bright: #7ed321 /* Verde neon */
+
+/* Cores de Estado */
+--success: #4d8d5f      /* Verde sucesso */
+--warning: #c9d9a4      /* Amarelo aviso */
+--error: #e6b3b3        /* Vermelho erro */
+
+/* Tons de Fundo */
+--row: #f0f6f2          /* Linha clara */
+--row-alt: #e2ece5      /* Linha alternada */
+--row-hover: #91a095    /* Linha hover */
+```
+
+### Animações Especiais
+
+#### 1. Efeito Neon Piscante (Header)
+
+```css
+/* Brilho pulsante no título */
+@keyframes neonGlow {
+    0%, 100% { text-shadow: suave }
+    50% { text-shadow: intenso }
 }
 ```
 
-### Logo
+#### 2. Grid Animado de Fundo
 
-Substitua as imagens em `img/`:
+```css
+/* Grid se movendo diagonalmente */
+@keyframes gridMove {
+    0% { transform: translate(0, 0) }
+    100% { transform: translate(50px, 50px) }
+}
+```
 
-- `copom.png` - Logo principal (recomendado: 200x200px)
-- `favicon.png` - Ícone do navegador (recomendado: 32x32px)
+#### 3. Logo com Glow Effect
 
-## 📱 Responsividade
+```css
+/* Logos brilham suavemente */
+@keyframes logoGlow {
+    0%, 100% { filter: brilho suave }
+    50% { filter: brilho intenso }
+}
+```
 
-O sistema é totalmente responsivo e se adapta a diferentes tamanhos de tela:
+#### 4. Background Pulsante
 
-- **Desktop**: Layout completo com todos os recursos
-- **Tablet**: Layout adaptado para telas médias
-- **Mobile**: Layout otimizado para dispositivos móveis
+```css
+/* Fundo do header pulsa */
+@keyframes backgroundGlow {
+    0%, 100% { box-shadow: normal }
+    50% { box-shadow: intenso }
+}
+```
 
-## 🔍 Funcionalidades Detalhadas
+### Elementos Interativos
 
-### Sistema de Busca
+- **Hover em Links**: Fundo escurece + linha verde aparece
+- **Hover em Linhas**: Background verde claro
+- **Colunas Clicáveis**: Cursor pointer + ordenação
+- **Botões**: Gradiente verde + hover brightening
 
-- Busca em todas as colunas simultaneamente
-- Não diferencia maiúsculas de minúsculas
-- Atualização em tempo real
-- Contador de resultados filtrados
+### Responsividade
 
-### Ordenação de Colunas
+#### Desktop (1200px+)
 
-- Clique no cabeçalho da coluna para ordenar
-- Primeiro clique: ordem crescente (A→Z)
-- Segundo clique: ordem decrescente (Z→A)
-- Indicador visual de ordenação ativo
+- Layout completo horizontal
+- Logos grandes (70px)
+- Links em linha única
+- Fonte padrão
 
-### Carregamento de Dados
+#### Tablet (768px)
 
-- Carregamento assíncrono via AJAX
-- Indicador de status de carregamento
-- Tratamento de erros
-- Contagem total de registros
+- Logos médios (55px)
+- Links em coluna vertical
+- Espaçamento reduzido
+- Fonte reduzida
+
+#### Mobile (480px)
+
+- Header empilhado (coluna)
+- Logos pequenos (50px)
+- Toolbar vertical
+- Botões full-width
+- Fonte mínima
+
+## 🔧 Funcionamento Técnico
+
+### Fluxo de Dados
+
+```
+1. Página carrega
+   ↓
+2. app.js executa
+   ↓
+3. Para cada aba em tabsConfig:
+   ├─ Cria seção HTML
+   ├─ Adiciona eventos (busca, limpar, ordenar)
+   └─ Chama loadSheet(idx, url)
+      ↓
+4. loadSheet usa PapaParse:
+   ├─ Baixa CSV da URL
+   ├─ Parse automático
+   ├─ Detecta headers
+   └─ Armazena em sheetsData[idx]
+      ↓
+5. buildHeader(idx):
+   ├─ Cria <th> para cada coluna
+   └─ Adiciona evento de ordenação
+      ↓
+6. render(idx):
+   ├─ Aplica filtros
+   ├─ Aplica ordenação
+   ├─ Renderiza <tbody>
+   └─ Atualiza contador
+```
+
+### Estrutura de Dados
+
+```javascript
+// Configuração das abas
+tabsConfig = [
+    { 
+        title: "DEZEMBRO 2025",
+        url: "https://docs.google.com/...csv"
+    }
+]
+
+// Dados carregados
+sheetsData = {
+    0: {
+        headers: ["Nome", "Função", "Horário"],
+        rows: [
+            { Nome: "João", Função: "ATCPO", Horário: "08-16h" },
+            { Nome: "Maria", Função: "TELE", Horário: "16-00h" }
+        ],
+        sort: { 
+            key: "Nome",  // Coluna atual
+            dir: 1        // 1=ASC, -1=DESC
+        }
+    }
+}
+```
+
+### Funções Principais
+
+#### `loadSheet(idx, url)`
+
+- Baixa CSV usando PapaParse
+- Armazena dados em `sheetsData[idx]`
+- Chama `buildHeader()` e `render()`
+
+#### `buildHeader(idx)`
+
+- Cria cabeçalhos da tabela
+- Adiciona ícone de ordenação
+- Configura eventos de clique
+
+#### `toggleSort(idx, key)`
+
+- Alterna direção se mesma coluna
+- Define nova coluna se diferente
+- Chama `render()` para atualizar
+
+#### `render(idx)`
+
+- Obtém termo de busca
+- Filtra linhas (busca em todas colunas)
+- Aplica ordenação se ativa
+- Chama `paintBody()` para renderizar
+- Atualiza contador
+
+#### `paintBody(idx, rows)`
+
+- Limpa tbody
+- Cria `<tr>` para cada linha
+- Cria `<td>` para cada coluna
+- Insere no DOM
+
+## 📊 Casos de Uso
+
+### Para Gestores de Escala
+
+- Visualizar alterações de múltiplos meses
+- Buscar rapidamente por nome de PM
+- Ordenar por função, horário ou data
+- Exportar visualmente (print)
+
+### Para Policiais
+
+- Consultar própria escala
+- Verificar trocas e substituições
+- Acessar documentos relacionados
+- Ver histórico de meses anteriores
+
+### Para Supervisores
+
+- Acompanhar preenchimento de escalas
+- Identificar padrões de trocas
+- Validar alterações documentadas
+- Gerar relatórios visuais
+
+## 🐛 Solução de Problemas
+
+### Tabela não carrega / "Erro ao carregar"
+
+**Causas possíveis:**
+
+1. URL do CSV incorreta
+2. Planilha não publicada corretamente
+3. Problemas de CORS
+4. Planilha privada
+
+**Soluções:**
+
+1. Verifique se a URL termina com `&output=csv`
+2. Republique a planilha como CSV
+3. Use servidor local (não arquivo local)
+4. Torne a planilha pública ou "qualquer pessoa com o link"
+
+### Dados aparecem incorretamente
+
+**Causas:**
+
+1. Planilha com formatação especial
+2. Headers duplicados
+3. Células vazias no meio dos dados
+
+**Soluções:**
+
+1. Use apenas texto simples na planilha
+2. Garanta nomes únicos de colunas
+3. Remova linhas completamente vazias
+
+### Busca não funciona
+
+**Verificar:**
+
+1. Console do navegador (F12) por erros
+2. Se o termo de busca está correto
+3. Se há dados na tabela
+
+### Ordenação não funciona
+
+**Verificar:**
+
+1. Se clicou no `<th>` (cabeçalho)
+2. Console por erros JavaScript
+3. Se há dados para ordenar
+
+### Links da navegação não funcionam
+
+**Soluções:**
+
+1. Verifique se URLs estão corretas
+2. Teste URLs diretamente no navegador
+3. Confirme que arquivos do Drive estão públicos
+4. Verifique atributo `target="_blank"`
+
+## 📱 Compatibilidade
+
+### Navegadores Suportados
+
+- ✅ Chrome 90+ (Recomendado)
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Edge 90+
+- ✅ Opera 76+
+
+### Requisitos
+
+- JavaScript habilitado
+- Conexão com internet (para carregar CSVs)
+- Resolução mínima: 360px
+
+### Limitações
+
+- Planilhas devem ser públicas ou compartilhadas
+- Máximo recomendado: 1000 linhas por aba
+- Atualização não é automática (requer F5)
+
+## 🚀 Melhorias Futuras
+
+- [ ] Auto-refresh a cada X minutos
+- [ ] Exportar para Excel/PDF
+- [ ] Filtros avançados por coluna
+- [ ] Destacar alterações recentes
+- [ ] Notificações de novas alterações
+- [ ] Comparação entre meses
+- [ ] Histórico de versões
+- [ ] Modo escuro
+- [ ] Paginação para grandes volumes
+- [ ] Estatísticas (dashboard)
+- [ ] Busca avançada com operadores
+- [ ] Favoritar registros
+- [ ] Comentários e anotações
+- [ ] PWA (funcionar offline)
+- [ ] Sincronização bidirecional
 
 ## 🤝 Contribuindo
 
 Contribuições são bem-vindas! Para contribuir:
 
-1. Faça um Fork do projeto
+1. Faça um fork do projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/NovaFuncionalidade`)
 3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
 4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
 5. Abra um Pull Request
 
-## 📝 Boas Práticas
+### Diretrizes
 
 - Mantenha o código limpo e comentado
-- Teste em diferentes navegadores
-- Otimize imagens antes de adicionar
-- Mantenha a responsividade
-- Documente mudanças significativas
-
-## 🐛 Resolução de Problemas
-
-### CSV não carrega
-
-- Verifique se a URL está correta
-- Certifique-se de que a planilha está publicada
-- Verifique a conexão com a internet
-- Confira o console do navegador (F12)
-
-### Dados não aparecem
-
-- Verifique se o CSV tem cabeçalhos
-- Certifique-se de que o formato está correto
-- Verifique se há caracteres especiais problemáticos
-
-### Botões PDF não funcionam
-
-- Verifique se as URLs dos arquivos são válidas
-- Certifique-se de que os arquivos estão compartilhados publicamente
-- Para Google Drive, use links de visualização, não de download
+- Teste em múltiplos navegadores
+- Siga o padrão de design existente
+- Atualize a documentação
+- Otimize para performance
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto é de uso interno da **Polícia Militar do Estado de São Paulo - COPOM/CPI-10**.
 
-## 👤 Autor
+Todos os direitos reservados.
 
-### Saulo Eleutério
+## ⚠️ Avisos Importantes
 
-- GitHub: [@seueleuterio](https://github.com/seueleuterio)
-
-## 📞 Suporte
-
-Para suporte, entre em contato através do GitHub Issues ou pelo email institucional.
-
-## 🔄 Atualizações
-
-### Versão 1.0.0 (Agosto 2025)
-
-- ✅ Lançamento inicial
-- ✅ Sistema de abas por mês
-- ✅ Busca e filtros
-- ✅ Ordenação de colunas
-- ✅ Interface responsiva
-- ✅ Integração com Google Sheets
+- Sistema de uso exclusivo da corporação
+- Não compartilhe links públicos externamente
+- Mantenha planilhas sempre atualizadas
+- Verifique dados antes de publicar
+- Respeite protocolos de segurança da informação
 
 ---
 
-⭐ Se este projeto foi útil, considere dar uma estrela no GitHub!
+## 👨‍💻 Desenvolvedor
 
-## Desenvolvido para a Polícia Militar
+**Saulo Eleutério**
+
+- **Unidade**: COPOM Araçatuba - CPI-10
+- **Email**: <sauloeleuterio@policiamilitar.sp.gov.br>
+- **Telefone**: (18) 98804-0181
+
+---
+
+## 🙏 Agradecimentos
+
+Agradecimento especial a:
+
+- **Equipe COPOM/CPI-10** pelo suporte e feedback
+- **Google Sheets** pela plataforma de dados
+- **PapaParse** pela biblioteca CSV
+- Todos os policiais que contribuem com dados
+
+---
+
+## 📞 Suporte Técnico
+
+### Para dúvidas sobre o sistema
+
+- **Email**: <sauloeleuterio@policiamilitar.sp.gov.br>
+- **Telefone/WhatsApp**: (18) 98804-0181
+- **Horário**: Segunda a Sexta, 8h às 18h
+
+---
+
+<div align="center">
+
+### 📊 Sistema de Alterações de Escala - COPOM
+
+**© 2025 | Desenvolvido por Saulo Eleutério**
+
+*"Organização e transparência nas escalas operacionais"*
+
+[![COPOM](https://img.shields.io/badge/COPOM-CPI--10-green?style=for-the-badge)]()
+[![PM-SP](https://img.shields.io/badge/PM-SP-blue?style=for-the-badge)]()
+[![Status](https://img.shields.io/badge/Status-Ativo-success?style=for-the-badge)]()
+[![Google Sheets](https://img.shields.io/badge/Database-Google%20Sheets-brightgreen?style=for-the-badge)]()
+[![PapaParse](https://img.shields.io/badge/Parser-PapaParse-orange?style=for-the-badge)]()
+
+---
+
+**Sistema desenvolvido para uso interno do COPOM - Araçatuba/SP**
+
+*Polícia Militar do Estado de São Paulo*
+
+**Versão**: 2025.11.27
+
+</div>
