@@ -149,12 +149,14 @@ body {
     margin: 0 auto;
 }
 
-/* Botão de categoria */
+/* ===== Botão de categoria ===== */
 .cat-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     padding: 13px 26px;
+    min-height: 48px;                          /* touch target mínimo */
     background: #111111;
     border: 1px solid #333333;
     color: #ffffff;
@@ -164,9 +166,12 @@ body {
     text-transform: uppercase;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: background 0.25s ease, border-color 0.25s ease,
+                box-shadow 0.25s ease, transform 0.25s ease;
     white-space: nowrap;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+    -webkit-tap-highlight-color: transparent;  /* remove flash azul no iOS/Android */
+    user-select: none;
 }
 
 .cat-btn:hover,
@@ -178,6 +183,17 @@ body {
     transform: translateY(-2px);
 }
 
+.cat-btn:active {
+    transform: translateY(0);                  /* feedback de toque */
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+/* Acessibilidade por teclado — visível só com teclado, não com mouse/touch */
+.cat-btn:focus-visible {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: 3px;
+}
+
 .cat-btn::after {
     border-top-color: #ffffff;
     opacity: 0.7;
@@ -186,6 +202,8 @@ body {
 .cat-icon {
     font-size: 18px;
     transition: transform 0.25s ease;
+    flex-shrink: 0;
+    pointer-events: none;
 }
 
 .cat-btn:hover .cat-icon,
@@ -200,6 +218,18 @@ body {
 .cat-btn--scales .cat-icon { color: #7ed321; }
 .cat-btn--phones .cat-icon { color: #4db6ac; }
 
+/* ===== Dropdown menu ===== */
+.cat-menu {
+    background: #1e1e1e;
+    border: 1px solid #3a3a3a;
+    border-top: 2px solid var(--accent-bright);
+    border-radius: 0 0 8px 8px;
+    min-width: 300px;
+    max-width: calc(100vw - 24px);            /* nunca sai da tela */
+    padding: 6px 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
 /* Borda superior colorida no dropdown por categoria */
 .cat-menu--docs   { border-top-color: #64b5f6; }
 .cat-menu--steps  { border-top-color: #ffb74d; }
@@ -207,17 +237,7 @@ body {
 .cat-menu--scales { border-top-color: #7ed321; }
 .cat-menu--phones { border-top-color: #4db6ac; }
 
-/* Dropdown menu */
-.cat-menu {
-    background: #1e1e1e;
-    border: 1px solid #3a3a3a;
-    border-top: 2px solid var(--accent-bright);
-    border-radius: 0 0 8px 8px;
-    min-width: 300px;
-    padding: 6px 0;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-
+/* ===== Item do dropdown ===== */
 .cat-item {
     color: #d4e3d8 !important;
     font-size: 12px;
@@ -225,10 +245,27 @@ body {
     letter-spacing: 0.5px;
     text-transform: uppercase;
     padding: 10px 18px;
+    min-height: 44px;                          /* touch target mínimo */
     display: flex;
     align-items: center;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, padding-left 0.2s ease;
     border-left: 3px solid transparent;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cat-item:hover {
+    background: #2a2a2a !important;
+    color: #ffffff !important;
+    border-left-color: var(--accent-bright);
+    padding-left: 22px;
+}
+
+/* Acessibilidade por teclado nos itens */
+.cat-item:focus-visible {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: -2px;
+    background: #2a2a2a !important;
+    color: #ffffff !important;
 }
 
 /* Ícone base dos itens */
@@ -240,13 +277,7 @@ body {
     margin-right: 10px;
     transition: transform 0.2s ease;
     color: #ffffff;
-}
-
-.cat-item:hover {
-    background: #2a2a2a !important;
-    color: #ffffff !important;
-    border-left-color: var(--accent-bright);
-    padding-left: 22px;
+    pointer-events: none;
 }
 
 .cat-item:hover .item-icon {
@@ -254,11 +285,11 @@ body {
 }
 
 /* Cores dos ícones por categoria */
-.cat-menu--docs   .item-icon { color: #64b5f6; }  /* azul claro  - Documentações */
-.cat-menu--steps  .item-icon { color: #ffb74d; }  /* laranja     - Passo a Passo */
-.cat-menu--sites  .item-icon { color: #ce93d8; }  /* lilás       - Sites Úteis   */
-.cat-menu--scales .item-icon { color: #7ed321; }  /* verde neon  - Escalas       */
-.cat-menu--phones .item-icon { color: #4db6ac; }  /* teal        - Telefones     */
+.cat-menu--docs   .item-icon { color: #64b5f6; }
+.cat-menu--steps  .item-icon { color: #ffb74d; }
+.cat-menu--sites  .item-icon { color: #ce93d8; }
+.cat-menu--scales .item-icon { color: #7ed321; }
+.cat-menu--phones .item-icon { color: #4db6ac; }
 
 /* ===== Header ===== */
 .header {
@@ -437,15 +468,21 @@ td {
         gap: 8px;
     }
 
+    /* Botões: 2 por linha em tablet */
+    .nav-categories-inner .dropdown {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 130px;
+    }
+
     .cat-btn {
-        flex: 1 1 calc(50% - 8px);
+        width: 100%;
         justify-content: center;
-        padding: 10px 12px;
+        padding: 12px 12px;
         font-size: 11px;
     }
 
     .cat-menu {
-        min-width: 260px;
+        min-width: 240px;
     }
 
     #sheets-container {
@@ -468,9 +505,37 @@ td {
         width: 50px;
     }
 
+    /* Botões: 2 por linha no mobile */
+    .nav-categories-inner .dropdown {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 120px;
+    }
+
     .cat-btn {
-        flex: 1 1 100%;
-        font-size: 12px;
+        width: 100%;
+        font-size: 10.5px;
+        padding: 11px 8px;
+        letter-spacing: 0.6px;
+        gap: 6px;
+    }
+
+    .cat-icon {
+        font-size: 15px;
+    }
+
+    .cat-menu {
+        min-width: 200px;
+        max-width: calc(100vw - 20px);
+    }
+
+    .cat-item {
+        font-size: 11px;
+        padding: 10px 12px;
+    }
+
+    .item-icon {
+        font-size: 13px;
+        margin-right: 8px;
     }
 
     .toolbar {
@@ -492,5 +557,32 @@ td {
         margin-left: 0;
         text-align: center;
         width: 100%;
+    }
+}
+
+/* Telas muito pequenas (< 360px): botões em coluna única */
+@media (max-width: 360px) {
+    .nav-categories {
+        padding: 8px;
+    }
+
+    .nav-categories-inner {
+        gap: 6px;
+    }
+
+    .nav-categories-inner .dropdown {
+        flex: 1 1 100%;
+    }
+
+    .cat-btn {
+        font-size: 11px;
+        padding: 12px 10px;
+        justify-content: flex-start;
+    }
+
+    .cat-menu {
+        min-width: 0;
+        width: calc(100vw - 16px);
+        max-width: none;
     }
 }
