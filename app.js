@@ -30,13 +30,19 @@ const tabsConfig = [
 const sheetsData = {};
 
 document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("sheets-container");
+  const container = document.getElementById("sheets-container");
 
-    // Criar containers para cada aba
-    tabsConfig.forEach((tab, idx) => {
-        const block = document.createElement("section");
-        block.className = "sheet-block";
-        block.innerHTML = `
+  // === RELÓGIO E TEMPERATURA ===
+  updateClock();
+  setInterval(updateClock, 1000);
+  fetchWeather();
+  setInterval(fetchWeather, 600000); // Atualizar a cada 10 minutos
+
+  // Criar containers para cada aba
+  tabsConfig.forEach((tab, idx) => {
+    const block = document.createElement("section");
+    block.className = "sheet-block";
+    block.innerHTML = `
     <h2>${tab.title}</h2>
     <div class="toolbar">
         <input type="search" placeholder="Filtrar..." data-search="${idx}" />
@@ -51,93 +57,167 @@ document.addEventListener("DOMContentLoaded", () => {
         </table>
     </div>
     `;
-        container.appendChild(block);
+    container.appendChild(block);
 
-        // Eventos de busca/limpar
-        block.querySelector(`[data-search="${idx}"]`).addEventListener("input", () => render(idx));
-        block.querySelector(`[data-clear="${idx}"]`).addEventListener("click", () => {
-            block.querySelector(`[data-search="${idx}"]`).value = "";
-            render(idx);
-        });
+    // Eventos de busca/limpar
+    block
+      .querySelector(`[data-search="${idx}"]`)
+      .addEventListener("input", () => render(idx));
+    block
+      .querySelector(`[data-clear="${idx}"]`)
+      .addEventListener("click", () => {
+        block.querySelector(`[data-search="${idx}"]`).value = "";
+        render(idx);
+      });
 
-        // Carregar CSV dessa aba
-        loadSheet(idx, tab.url);
-    });
+    // Carregar CSV dessa aba
+    loadSheet(idx, tab.url);
+  });
 });
 
-function loadSheet(idx, url) {
-    Papa.parse(url, {
-        download: true,
-        header: true,
-        skipEmptyLines: true,
-        complete: (results) => {
-            const headers = results.meta.fields || [];
-            const rows = results.data || [];
-            sheetsData[idx] = { headers, rows, sort: { key: null, dir: 1 } };
-            buildHeader(idx);
-            render(idx);
-            setStatus(idx, `${rows.length} registros.`);
-        },
-        error: () => setStatus(idx, "Erro ao carregar"),
+// === FUNÇÕES DO RELÓGIO E TEMPERATURA ===
+function updateClock() {
+  const now = new Date();
+
+  // Formatar hora
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
+  const timeString = `${hours}:${minutes}:${seconds}`;
+
+  // Formatar data em português
+  const dayNames = [
+    "DOMINGO",
+    "SEGUNDA-FEIRA",
+    "TERÇA-FEIRA",
+    "QUARTA-FEIRA",
+    "QUINTA-FEIRA",
+    "SEXTA-FEIRA",
+    "SÁBADO",
+  ];
+  const dayName = dayNames[now.getDay()];
+  const day = String(now.getDate()).padStart(2, "0");
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const year = now.getFullYear();
+  const dateString = `${dayName}, ${day}/${month}/${year}`;
+
+  // Atualizar elementos
+  const timeElement = document.getElementById("clock-time");
+  const dateElement = document.getElementById("clock-date");
+
+  if (timeElement) timeElement.textContent = timeString;
+  if (dateElement) dateElement.textContent = dateString;
+}
+
+function fetchWeather() {
+  // Usando Open-Meteo API (gratuita, sem autenticação)
+  // Coordenadas de Araçatuba/SP: -21.7964, -50.4331
+  const lat = -21.7964;
+  const lng = -50.4331;
+
+  fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m&timezone=America/Sao_Paulo`,
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      const temp = Math.round(data.current.temperature_2m);
+      const tempElement = document.getElementById("weather-temp");
+      if (tempElement) {
+        tempElement.textContent = `${temp}°C`;
+      }
+    })
+    .catch((error) => {
+      console.log("Erro ao buscar temperatura:", error);
+      const tempElement = document.getElementById("weather-temp");
+      if (tempElement) {
+        tempElement.textContent = "N/A°C";
+      }
     });
+}
+
+// === FUNÇÕES DAS TABELAS ===
+function loadSheet(idx, url) {
+  Papa.parse(url, {
+    download: true,
+    header: true,
+    skipEmptyLines: true,
+    complete: (results) => {
+      const headers = results.meta.fields || [];
+      const rows = results.data || [];
+      sheetsData[idx] = { headers, rows, sort: { key: null, dir: 1 } };
+      buildHeader(idx);
+      render(idx);
+      setStatus(idx, `${rows.length} registros.`);
+    },
+    error: () => setStatus(idx, "Erro ao carregar"),
+  });
 }
 
 function buildHeader(idx) {
-    const { headers } = sheetsData[idx];
-    const tr = document.getElementById(`thead-${idx}`);
-    tr.innerHTML = "";
-    headers.forEach(h => {
-        const th = document.createElement("th");
-        th.textContent = h;
-        const sortSpan = document.createElement("span");
-        sortSpan.className = "sort";
-        sortSpan.textContent = "↕";
-        th.appendChild(sortSpan);
-        th.addEventListener("click", () => toggleSort(idx, h));
-        tr.appendChild(th);
-    });
+  const { headers } = sheetsData[idx];
+  const tr = document.getElementById(`thead-${idx}`);
+  tr.innerHTML = "";
+  headers.forEach((h) => {
+    const th = document.createElement("th");
+    th.textContent = h;
+    const sortSpan = document.createElement("span");
+    sortSpan.className = "sort";
+    sortSpan.textContent = "↕";
+    th.appendChild(sortSpan);
+    th.addEventListener("click", () => toggleSort(idx, h));
+    tr.appendChild(th);
+  });
 }
 
 function toggleSort(idx, key) {
-    const s = sheetsData[idx].sort;
-    if (s.key === key) {
-        s.dir *= -1;
-    } else {
-        s.key = key;
-        s.dir = 1;
-    }
-    render(idx);
+  const s = sheetsData[idx].sort;
+  if (s.key === key) {
+    s.dir *= -1;
+  } else {
+    s.key = key;
+    s.dir = 1;
+  }
+  render(idx);
 }
 
 function render(idx) {
-    const data = sheetsData[idx];
-    const q = document.querySelector(`[data-search="${idx}"]`).value.toLowerCase();
-    let rows = data.rows.filter(r =>
-        data.headers.some(h => String(r[h] || "").toLowerCase().includes(q))
+  const data = sheetsData[idx];
+  const q = document
+    .querySelector(`[data-search="${idx}"]`)
+    .value.toLowerCase();
+  let rows = data.rows.filter((r) =>
+    data.headers.some((h) =>
+      String(r[h] || "")
+        .toLowerCase()
+        .includes(q),
+    ),
+  );
+  if (data.sort.key) {
+    const { key, dir } = data.sort;
+    rows.sort(
+      (a, b) => String(a[key]).localeCompare(String(b[key]), "pt-BR") * dir,
     );
-    if (data.sort.key) {
-        const { key, dir } = data.sort;
-        rows.sort((a, b) => String(a[key]).localeCompare(String(b[key]), "pt-BR") * dir);
-    }
-    paintBody(idx, rows);
-    document.getElementById(`counter-${idx}`).textContent = `${rows.length} / ${data.rows.length}`;
+  }
+  paintBody(idx, rows);
+  document.getElementById(`counter-${idx}`).textContent =
+    `${rows.length} / ${data.rows.length}`;
 }
 
 function paintBody(idx, rows) {
-    const tbody = document.getElementById(`tbody-${idx}`);
-    const { headers } = sheetsData[idx];
-    tbody.innerHTML = "";
-    rows.forEach(r => {
-        const tr = document.createElement("tr");
-        headers.forEach(h => {
-            const td = document.createElement("td");
-            td.textContent = r[h] || "";
-            tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
+  const tbody = document.getElementById(`tbody-${idx}`);
+  const { headers } = sheetsData[idx];
+  tbody.innerHTML = "";
+  rows.forEach((r) => {
+    const tr = document.createElement("tr");
+    headers.forEach((h) => {
+      const td = document.createElement("td");
+      td.textContent = r[h] || "";
+      tr.appendChild(td);
     });
+    tbody.appendChild(tr);
+  });
 }
 
 function setStatus(idx, msg) {
-    document.getElementById(`status-${idx}`).textContent = msg;
+  document.getElementById(`status-${idx}`).textContent = msg;
 }

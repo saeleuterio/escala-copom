@@ -48,6 +48,15 @@ body {
     position: relative;
     overflow: hidden;
     animation: backgroundGlow 3s ease-in-out infinite;
+    gap: 30px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 1;
 }
 
 @keyframes backgroundGlow {
@@ -121,6 +130,7 @@ body {
     z-index: 1;
     filter: drop-shadow(0 0 10px rgba(126, 211, 33, 0.5));
     animation: logoGlow 2s ease-in-out infinite;
+    flex-shrink: 0;
 }
 
 @keyframes logoGlow {
@@ -130,6 +140,61 @@ body {
     50% {
         filter: drop-shadow(0 0 20px rgba(126, 211, 33, 0.9));
     }
+}
+
+/* ===== Relógio e Temperatura ===== */
+.clock-weather {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.clock-box,
+.weather-box {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(126, 211, 33, 0.5);
+    border-radius: 12px;
+    padding: 14px 18px;
+    backdrop-filter: blur(5px);
+    min-width: auto;
+    text-align: center;
+}
+
+.time {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.date {
+    font-size: 11px;
+    color: var(--accent-bright);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.temp {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-bright);
+    letter-spacing: 1px;
+    text-shadow: 0 2px 10px rgba(126, 211, 33, 0.4);
+}
+
+.city {
+    font-size: 11px;
+    color: #fff;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* ===== Navegação Categorizada ===== */
@@ -450,6 +515,12 @@ td {
 @media (max-width: 768px) {
     .top-header {
         padding: 16px 20px;
+        gap: 12px;
+    }
+
+    .header-left {
+        gap: 15px;
+        flex-wrap: wrap;
     }
 
     .top-header h1 {
@@ -458,6 +529,24 @@ td {
 
     .logo {
         width: 55px;
+    }
+
+    .clock-weather {
+        gap: 12px;
+    }
+
+    .clock-box,
+    .weather-box {
+        min-width: 160px;
+        padding: 12px 16px;
+    }
+
+    .time {
+        font-size: 22px;
+    }
+
+    .temp {
+        font-size: 24px;
     }
 
     .nav-categories {
@@ -498,11 +587,49 @@ td {
     .top-header {
         flex-direction: column;
         gap: 12px;
-        padding: 16px;
+        padding: 12px;
+    }
+
+    .header-left {
+        flex-direction: column;
+        gap: 12px;
     }
 
     .logo {
         width: 50px;
+    }
+
+    .clock-weather {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .clock-box,
+    .weather-box {
+        min-width: auto;
+        width: 100%;
+        padding: 12px 16px;
+    }
+
+    .time {
+        font-size: 20px;
+    }
+
+    .date {
+        font-size: 12px;
+    }
+
+    .temp {
+        font-size: 26px;
+    }
+
+    .city {
+        font-size: 11px;
+    }
+
+    .top-header h1 {
+        font-size: 16px;
     }
 
     /* Botões: 2 por linha no mobile */
