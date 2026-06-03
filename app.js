@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateClock();
   setInterval(updateClock, 1000);
   fetchWeather();
-  setInterval(fetchWeather, 600000); // Atualizar a cada 10 minutos
+  setInterval(fetchWeather, 60000); // Atualizar a cada 1 minuto
 
   // Criar containers para cada aba
   tabsConfig.forEach((tab, idx) => {
