@@ -109,8 +109,8 @@ function updateClock() {
 function fetchWeather() {
   // Usando Open-Meteo API (gratuita, sem autenticação)
   // Coordenadas de Araçatuba/SP: -21.7964, -50.4331
-  const lat = -21.7964;
-  const lng = -50.4331;
+  const lat = -21.2089;
+  const lng = -50.4328;
 
   fetch(
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m&timezone=America/Sao_Paulo`,
