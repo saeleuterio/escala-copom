@@ -9,6 +9,10 @@ const tabsConfig = [
     url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=604179724&single=true&output=csv",
   },
   {
+    title: "SETEMBRO 2026",
+    url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=2132124606&single=true&output=csv",
+  },
+  {
     title: "JUNHO 2026",
     url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1CA6n--CWez-WSpU2iywOGZozDaAlWMjuYxlmHxnBRnS4VImWZCIlOMjd1EbPxYj9OTVPHBQ8oiPG/pub?gid=733717061&single=true&output=csv",
   },
